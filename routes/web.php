@@ -19,13 +19,15 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', function () {
     return view('index');
-});
+})->name('home');
 // Route::get('faktury', function () {
 //     return view('invoices.index');
 // });
 // Route::get('faktury/dodaj', function () {
 //     return view('invoices.create');
 // });
-Route::get('/faktury', [InvoicesController::class, 'index']);
-Route::get('/faktury/dodaj', [InvoicesController::class, 'create']);
+Route::get('/faktury', [InvoicesController::class, 'index'])->name('invoices.index');
+Route::get('/faktury/dodaj', [InvoicesController::class, 'create'])->name('invoices.create');
+Route::get('/faktury/edytuj/{id}', [InvoicesController::class, 'edit'])->name('invoices.edit');
 Route::post('/faktury/zapisz', [InvoicesController::class, 'store'])->name('invoices.store');
+Route::put('/faktury/zmien/{id}', [InvoicesController::class, 'update'])->name('invoices.update');
