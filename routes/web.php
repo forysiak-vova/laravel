@@ -26,5 +26,6 @@ Route::get('/', function () {
 // Route::get('faktury/dodaj', function () {
 //     return view('invoices.create');
 // });
-Route::get('faktury', [InvoicesController::class, 'index']);
-Route::get('faktury/dodaj', [InvoicesController::class, 'create']);
+Route::get('/faktury', [InvoicesController::class, 'index']);
+Route::get('/faktury/dodaj', [InvoicesController::class, 'create']);
+Route::post('/faktury/zapisz', [InvoicesController::class, 'store'])->name('invoices.store');
