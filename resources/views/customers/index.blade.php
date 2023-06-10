@@ -12,7 +12,7 @@
       </div>
       @endif
       <!-- Portfolio Section Heading-->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Lista faktur</h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Lista klietów</h2>
       <!-- Icon Divider-->
       <div class="divider-custom">
          <div class="divider-custom-line"></div>
@@ -24,25 +24,23 @@
          <thead>
             <tr>
                <th scope="col">#</th>
-               <th scope="col">Numer faktury</th>
-               <th scope="col">Data</th>
-               <th scope="col">Kwota</th>
-               <th scope="col">Klient</th>
+               <th scope="col">Nazwa klienta</th>
+               <th scope="col">Adress</th>
+               <th scope="col">Nip</th>
                <th scope="col">Akcje</th>
                <th scope="col">Usun</th>
             </tr>
          </thead>
          <tbody>
-            @foreach($invoices as $invoice)
+            @foreach($customers as $customer)
             <tr>
-               <th scope="row">{{$invoice->id}}</th>
-               <td>{{$invoice->number}}</td>
-               <td>{{$invoice->date}}</td>
-               <td>{{$invoice->total}}</td>
-               <td>{{$invoice->customer->name}}</td>
-               <td><a class="btn btn-primary" href="{{ route('invoices.edit', ['id' => $invoice->id]) }}">Edytuj</a></td>
+               <th scope="row">{{$customer->id}}</th>
+               <td>{{$customer->name}}</td>
+               <td>{{$customer->adress}}</td>
+               <td>{{$customer->nip}}</td>
+               <td><a class="btn btn-primary" href="{{ route('customers.edit', ['klienci' => $customer->id]) }}">Edytuj</a></td>
                <td>
-                  <form method="POST" action="{{route('invoices.delete', ['id' => $invoice->id])}}">
+                  <form method="POST" action="{{route('customers.destroy', ['klienci' => $customer->id])}}">
                      @csrf
                      @method('delete')
                      <button type="submit" class="btn btn-danger">Usuń</button>

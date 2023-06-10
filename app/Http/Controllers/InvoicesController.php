@@ -9,7 +9,7 @@ class InvoicesController extends Controller
 {
     public function index()
     {
-        $name = Invoice::all();
+        $name = Invoice::with('customer')->get();
         return view('invoices.index', ['invoices' => $name]);
     }
     public function create()
@@ -30,7 +30,7 @@ class InvoicesController extends Controller
         $invoice->number = $request->number;
         $invoice->date = $request->data;
         $invoice->total = $request->total;
-
+        $invoice->customer_id = $request->customer;
         $invoice->save();
 
         return redirect()->route('invoices.index')->with('message', 'Faktura dodana poprawnie');
@@ -48,5 +48,13 @@ class InvoicesController extends Controller
         $invoice->save();
 
         return redirect()->route('invoices.index')->with('message', 'Faktura zmieniona poprawnie');
+    }
+    public function delete($id, Request $request)
+    {
+
+        Invoice::destroy($id);
+
+
+        return redirect()->route('invoices.index')->with('message', 'Faktura usunięta poprawnie');
     }
 }
