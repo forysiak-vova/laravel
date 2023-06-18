@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('adress');
-            $table->integer('nip');
+            $table->unsignedBigInteger('nip');
             $table->timestamps();
         });
     }

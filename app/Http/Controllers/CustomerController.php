@@ -30,6 +30,12 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required|min:5',
+            'adress' => 'required|max:20',
+            'nip' => 'required|digits:10'
+        ]);
         $customer = new Customer();
 
         $customer->name = $request->name;
@@ -44,9 +50,11 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $customer = Customer::with('invoices')->where('id', $id)->firstOrFail();
+
+        return view('customers.single', compact('customer'));
     }
 
     /**
